@@ -7,9 +7,14 @@ export function getBrick(index, number) {
     new THREE.MeshLambertMaterial({
       color: 0xff0000,
     })
-
-
-
   );
+
+  mesh.position.set(
+    radius * Math.sin(angle),
+    0,
+    radius * Math.cos(angle)
+  );
+
+  return mesh;
 
 }
