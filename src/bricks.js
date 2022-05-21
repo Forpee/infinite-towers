@@ -16,6 +16,8 @@ export function getBrick(index, number) {
     radius * Math.cos(angle)
   );
 
+  mesh.rotation.y = angle;
+
   return mesh;
 
 }
