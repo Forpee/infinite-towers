@@ -25,19 +25,23 @@ const scene = new THREE.Scene();
 const geometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32);
 
 // Material
-const material = new THREE.ShaderMaterial({
-    uniforms: {
-        uTime: { value: 0 },
-    },
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
-    side: THREE.DoubleSide
-});
+// const material = new THREE.ShaderMaterial({
+//     uniforms: {
+//         uTime: { value: 0 },
+//     },
+//     vertexShader: vertexShader,
+//     fragmentShader: fragmentShader,
+//     side: THREE.DoubleSide
+// });
 
-// Mesh
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+// // Mesh
+// const mesh = new THREE.Mesh(geometry, material);
+// scene.add(mesh);
+let number = 6;
 
+for (let i = 0; i < number; i++) {
+    scene.add(getBrick(i, number));
+}
 /**
  * Sizes
  */
@@ -97,7 +101,7 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime();
 
     // Update uniforms
-    material.uniforms.uTime.value = elapsedTime;
+    // material.uniforms.uTime.value = elapsedTime;
 
     // Render
     renderer.render(scene, camera);
