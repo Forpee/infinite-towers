@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+
 export function getBrick(index, number) {
   let radius = 3;
   let angle = index * 2 * Math.PI / number;
