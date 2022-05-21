@@ -49,7 +49,14 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 };
+// Add directional light with brightness of 1
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(0, 1, 1);
+scene.add(light);
+// Add ambient light with brightness of 1
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 
+scene.add(ambientLight);
 window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth;
