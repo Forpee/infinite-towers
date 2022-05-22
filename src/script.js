@@ -37,6 +37,10 @@ const geometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32);
 // // Mesh
 // const mesh = new THREE.Mesh(geometry, material);
 // scene.add(mesh);
+
+// group
+const group = new THREE.Group();
+scene.add(group);
 let number = 6;
 let rows = 10;
 
@@ -56,8 +60,8 @@ for (let j = 0; j < rows; j++) {
         const dupl = getBrick(i, number, j % 2, random[j % 2][i]);
         brick.position.setY(-j);
         dupl.position.setY(-j);
-        scene.add(brick);
-        scene.add(dupl);
+        group.add(brick);
+        group.add(dupl);
         dupl.visible = false;
 
         anim.push({
@@ -134,8 +138,11 @@ const tick = () => {
 
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
+
+    group.position.y = elapsedTime * 0.5;
+
     anim.forEach(m => {
-        m.mesh.position.setY(m.y + elapsedTime * 0.4);
+        // m.mesh.position.setY(m.y + elapsedTime * 0.4);
         if (m.row < 2) {
             let p = (elapsedTime + m.offset) % 1;
             m.mesh.position.setY(m.y + p * 10);
