@@ -139,12 +139,12 @@ const tick = () => {
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
 
-    group.position.y = elapsedTime * 0.5;
+    // group.position.y = elapsedTime * 0.5;
 
     anim.forEach(m => {
         // m.mesh.position.setY(m.y + elapsedTime * 0.4);
         if (m.row < 2) {
-            let p = elapsedTime + m.offset;
+            let p = (elapsedTime + m.offset) % 1;
             // m.mesh.position.setY(m.y + p * 10);
             if (p > 1) {
                 m.mesh.position.setY(m.y + (2 - p) * 10 + elapsedTime * 0.5);
