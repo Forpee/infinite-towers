@@ -42,16 +42,29 @@ let rows = 10;
 
 let anim = [];
 
+let random = Array(2).fill().map(a => Array(number));
+
+for (let i = 0; i < number; i++) {
+    for (let j = 0; j < 2; j++) {
+        random[j][i] = Math.random() < 0.5 ? 0 : 1;
+    }
+}
+
 for (let j = 0; j < rows; j++) {
     for (let i = 0; i < number; i++) {
-        const brick = getBrick(i, number, j % 2);
+        const brick = getBrick(i, number, j % 2, random[j % 2][i]);
+        const dupl = getBrick(i, number, j % 2, random[j % 2][i]);
         brick.position.setY(-j);
+        dupl.position.setY(-j);
         scene.add(brick);
+        scene.add(dupl);
+        dupl.visible = false;
 
         anim.push({
             y: -j,
             row: j,
             mesh: brick,
+            dupl,
             offset: Math.random()
         });
 
@@ -122,9 +135,10 @@ const tick = () => {
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
     anim.forEach(m => {
-        m.mesh.position.setY(m.y + elapsedTime * 0.2);
+        m.mesh.position.setY(m.y + elapsedTime * 0.4);
         if (m.row < 2) {
-            m.mesh.position.setY(m.y + elapsedTime * 0.8);
+            let p = (elapsedTime + m.offset) % 1;
+            m.mesh.position.setY(m.y + p * 10);
         }
     });
     // Update uniforms
