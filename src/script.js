@@ -38,9 +38,14 @@ const geometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32);
 // const mesh = new THREE.Mesh(geometry, material);
 // scene.add(mesh);
 let number = 6;
+let rows = 5;
 
-for (let i = 0; i < number; i++) {
-    scene.add(getBrick(i, number));
+for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < number; i++) {
+        const brick = getBrick(i, number, j % 2);
+        brick.position.setY(j);
+        scene.add(brick);
+    }
 }
 /**
  * Sizes
@@ -51,10 +56,10 @@ const sizes = {
 };
 // Add directional light with brightness of 1
 const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(0, 1, 1);
+light.position.set(0, 0, 1);
 scene.add(light);
 // Add ambient light with brightness of 1
-const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 
 scene.add(ambientLight);
 window.addEventListener('resize', () => {
@@ -79,7 +84,7 @@ window.addEventListener('resize', () => {
 
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-camera.position.set(0, 4, 6);
+camera.position.set(0, 6, 12);
 scene.add(camera);
 
 // Controls
