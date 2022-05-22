@@ -144,8 +144,17 @@ const tick = () => {
     anim.forEach(m => {
         // m.mesh.position.setY(m.y + elapsedTime * 0.4);
         if (m.row < 2) {
-            let p = (elapsedTime + m.offset) % 1;
-            m.mesh.position.setY(m.y + p * 10);
+            let p = (elapsedTime + m.offset);
+            // m.mesh.position.setY(m.y + p * 10);
+            if (p > 1) {
+                m.mesh.position.setY(m.y + (2 - p) * 10 + elapsedTime * 0.4);
+                m.dupl.visible = true;
+            } else {
+                m.mesh.position.setY(m.y + (1 - p) * 10);
+                m.dupl.visible = false;
+            }
+        } else {
+            m.dupl.visble = false;
         }
     });
     // Update uniforms
