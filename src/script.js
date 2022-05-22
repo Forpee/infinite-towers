@@ -38,13 +38,23 @@ const geometry = new THREE.PlaneBufferGeometry(1, 1, 32, 32);
 // const mesh = new THREE.Mesh(geometry, material);
 // scene.add(mesh);
 let number = 6;
-let rows = 5;
+let rows = 10;
+
+let anim = [];
 
 for (let j = 0; j < rows; j++) {
     for (let i = 0; i < number; i++) {
         const brick = getBrick(i, number, j % 2);
-        brick.position.setY(j);
+        brick.position.setY(-j);
         scene.add(brick);
+
+        anim.push({
+            y: -j,
+            row: j,
+            mesh: brick,
+            offset: Math.random()
+        });
+
     }
 }
 /**
@@ -104,14 +114,19 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  * Animate
  */
 const clock = new THREE.Clock();
-
+// scene.position.set(0, 0, 30);
 const tick = () => {
     // Update controls
     controls.update();
 
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
-
+    anim.forEach(m => {
+        m.mesh.position.setY(m.y + elapsedTime * 0.2);
+        if (m.row < 2) {
+            m.mesh.position.setY(m.y + elapsedTime * 0.8);
+        }
+    });
     // Update uniforms
     // material.uniforms.uTime.value = elapsedTime;
 
