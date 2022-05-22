@@ -69,7 +69,7 @@ for (let j = 0; j < rows; j++) {
             row: j,
             mesh: brick,
             dupl,
-            offset: Math.random()
+            offset: j / 2 + Math.random() / 2
         });
 
     }
@@ -139,15 +139,15 @@ const tick = () => {
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
 
-    group.position.y = elapsedTime * 0.5;
+    group.position.y = -elapsedTime * 0.5;
 
     anim.forEach(m => {
         // m.mesh.position.setY(m.y + elapsedTime * 0.4);
         if (m.row < 2) {
-            let p = (elapsedTime + m.offset);
+            let p = elapsedTime + m.offset;
             // m.mesh.position.setY(m.y + p * 10);
             if (p > 1) {
-                m.mesh.position.setY(m.y + (2 - p) * 10 + elapsedTime * 0.4);
+                m.mesh.position.setY(m.y + (2 - p) * 10 + elapsedTime * 0.5);
                 m.dupl.visible = true;
             } else {
                 m.mesh.position.setY(m.y + (1 - p) * 10);
