@@ -139,7 +139,7 @@ const tick = () => {
     // Get elapsedtime
     const elapsedTime = clock.getElapsedTime();
 
-    group.position.y = -elapsedTime * 0.5;
+    group.position.y = elapsedTime * 0.5;
 
     anim.forEach(m => {
         // m.mesh.position.setY(m.y + elapsedTime * 0.4);
